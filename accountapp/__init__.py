@@ -1,2 +1,3 @@
-"""python manage.py startapp accountapp"""
+"""python manage.py startapp accountapp
+test"""
 
