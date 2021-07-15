@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
-
+{% load bootstrap4 %}
 {% block content %}
-<div class="m-5">
+<div class="m-5 mw-500 text-center m-auto">
     <div>
         <h4>
             Sign In
@@ -10,7 +10,7 @@
     <div>
         <form action="{% url 'accountApp:login' %}" method="post">
             {% csrf_token %}
-            {{ form }}
+            {% bootstrap_form form %}
             <div class="m-5">
                 <input type="submit" class="btn btn-dark rounded-pill px-5">
             </div>
