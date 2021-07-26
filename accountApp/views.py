@@ -1,16 +1,20 @@
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, HttpResponseForbidden
 from django.shortcuts import render
 
 # Create your views here.
 from django.urls import reverse, reverse_lazy
+from django.utils.decorators import method_decorator
 from django.views.generic import CreateView, DetailView, UpdateView, DeleteView
 
+from accountApp.decorator import account_ownership_required
 from accountApp.form.form import AccountCreationForm
 from accountApp.models import HelloWorld
 
 
+@login_required(login_url=reverse_lazy('accountApp:login'))
 def hello_world(request):
     if request.method == "POST":
         temp = request.POST.get("input_text")
@@ -39,6 +43,11 @@ class AccountDetailView(DetailView):
     template_name = 'accountApp/detail.html'
 
 
+has_ownership = [login_required, account_ownership_required]
+
+
+@method_decorator(has_ownership, 'get')
+@method_decorator(has_ownership, 'post')
 class AccountUpdateView(UpdateView):
     model = User
     form_class = AccountCreationForm
@@ -47,6 +56,8 @@ class AccountUpdateView(UpdateView):
     success_url = reverse_lazy('accountApp:hello_world')
 
 
+@method_decorator(has_ownership, 'get')
+@method_decorator(has_ownership, 'post')
 class AccountDeleteView(DeleteView):
     model = User
     context_object_name = 'target_user'
