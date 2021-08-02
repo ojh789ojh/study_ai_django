@@ -6,3 +6,4 @@ test"""
 # python manage.py createsuperuser
 # python manage.py startapp profileapp
 # pip install pillow
+# python manage.py startapp articleapp
