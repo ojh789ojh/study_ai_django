@@ -19,8 +19,11 @@ from django.contrib import admin
 from django.urls import path, include
 
 # from gis_test_1 import settings
+from articleapp.views import ArticleListView
 
 urlpatterns = [
+    path('', ArticleListView.as_view(), name='home'),
+
     path('admin/', admin.site.urls),
     path('accounts/', include('accountApp.urls')),
     path('profile/', include('profileapp.urls')),
@@ -28,5 +31,6 @@ urlpatterns = [
     path('comments/', include('commentapp.urls')),
     path('projects/', include('projectapp.urls')),
     path('subscribe/', include('subscribeapp.urls')),
+    path('likes/', include('likeapp.urls')),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
