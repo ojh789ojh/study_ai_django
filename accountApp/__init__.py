@@ -24,3 +24,6 @@ test"""
 # sudo apt-get update
 #  sudo apt-get install docker-ce docker-ce-cli containerd.io
 #  sudo docker run hello-world
+
+# sudo docker swarm init
+# docker swarm join --token SWMTKN-1-0fcod1wk0sf9lxvh91cawit96pkq9xk3trxqftv3h5xm5lyr24-cck1k2vzrkknu8z0r0u8lgd10 172.31.0.146:2377
